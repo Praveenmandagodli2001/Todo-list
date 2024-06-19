@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-DO-List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section>
+        <div id="div_tag">
+            <label for="" id="demo">To-DO-List:</label>
+            <input type="text" id="text-id" class="input" placeholder="add something...">
+            <button id="button_tag" onclick="addSomething()">Add</button>
+            <div id="to-text">
+
+            </div>
+            
+        </div>
+        
+    </section>
+    <script>
+        let inputElement = document.getElementById("text-id");
+        let divtag = document.getElementById("to-text");
+
+        function addSomething() {
+            var container = document.createElement('div');
+            container.style.display = 'flex';
+            container.style.alignItems = 'center';
+            container.style.marginTop = '10px';
+
+            var paragraph = document.createElement('p');
+            paragraph.innerText = inputElement.value;
+            paragraph.style.fontSize = "30px";
+            paragraph.style.color = "blue";
+            paragraph.style.marginRight = "10px";
+            paragraph.style.flexGrow = "2";
+
+            var editButton = document.createElement('button');
+            editButton.innerText = "Edit";
+            editButton.style.marginRight = "200px";
+
+            var deleteButton = document.createElement('button');
+            deleteButton.innerText = "Delete";
+            deleteButton.style.marginRight = "200px";
+
+            container.appendChild(paragraph);
+            container.appendChild(editButton);
+            container.appendChild(deleteButton);
+            divtag.appendChild(container);
+
+            inputElement.value = "";
+
+            //editing 
+            editButton.addEventListener('click', function() {
+                var newText = prompt("Edit your item:", paragraph.innerText);
+                if (newText !== null && newText.trim() !== "") {
+                    paragraph.innerText = newText;
+                }
+            });
+
+            //delete button
+            deleteButton.addEventListener('click', function() {
+                divtag.removeChild(container);
+            });
+
+            paragraph.addEventListener('click', function() {
+                paragraph.style.textDecoration = "line-through";
+            });
+
+            paragraph.addEventListener('dblclick', function() {
+                divtag.removeChild(container);
+            });
+        }
+
+
+
+    </script>
+
+
+</body>
+</html>
